@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 2019_04_11_150939) do
   create_table "users", id: false, force: :cascade do |t|
     t.string "name"
     t.string "username"
-    t.string "password"
     t.string "public_addr", null: false
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["public_addr"], name: "index_users_on_public_addr", unique: true

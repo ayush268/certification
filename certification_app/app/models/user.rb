@@ -8,4 +8,7 @@ class User < ApplicationRecord
   has_many :courses
   has_many :user_course_mappings
   has_many :courses_taken, class_name: 'Course', through: :user_course_mappings, :source => :course
+
+  has_secure_password
+  validates :password, presence: true, length: { minimum: 8 }
 end
