@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   validates :name, presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 30 }, uniqueness: true
+  validates :email, presence: true, length: { maximum: 100 }, uniqueness: true
   validates :public_addr, presence: true, length: {is: 40}, uniqueness: true
 
   has_many :courses

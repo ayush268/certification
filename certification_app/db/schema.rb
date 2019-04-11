@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_150939) do
   create_table "users", id: false, force: :cascade do |t|
     t.string "name"
     t.string "username"
+    t.string "email"
     t.string "public_addr", null: false
     t.string "password_digest"
     t.datetime "created_at", null: false
