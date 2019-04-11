@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   self.primary_key = 'public_addr'
 
+  attr_accessor :remember_token
+
   validates :name, presence: true, length: { maximum: 50 }
   validates :username, presence: true, length: { maximum: 30 }, uniqueness: true
   validates :email, presence: true, length: { maximum: 100 }, uniqueness: true
