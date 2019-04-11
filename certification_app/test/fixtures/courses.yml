@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  course_no: MyString
-  course_session: MyString
-  course_desc: MyText
-  user_id: MyString
+  course_no: CS731
+  course_session: 2019-20
+  course_desc: Blockchain
+  user_id: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 two:
-  course_no: MyString
-  course_session: MyString
-  course_desc: MyText
-  user_id: MyString
+  course_no: CS335
+  course_session: 2019-20
+  course_desc: Compiler
+  user_id: cccccccccccccccccccccccccccccccccccccccc

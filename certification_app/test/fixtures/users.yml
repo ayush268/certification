@@ -1,13 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  username: MyString
-  password: MyString
-  public_addr: MyString
+  name: Ayush
+  username: ayushb
+  password: 1234
+  public_addr: aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 
 two:
-  name: MyString
-  username: MyString
-  password: MyString
-  public_addr: MyString
+  name: Vicky
+  username: vicks
+  password: 1122
+  public_addr: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+
+three:
+  name: Danielle
+  username: danny
+  password: 1357
+  public_addr: cccccccccccccccccccccccccccccccccccccccc
