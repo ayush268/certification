@@ -29,3 +29,6 @@
 
 # Ignore master key for decrypting credentials and more.
 /certification_app/config/master.key
+
+# Other Stuff
+.rvmrc
