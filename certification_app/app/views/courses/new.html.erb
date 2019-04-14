@@ -1,2 +1,21 @@
-<h1>Courses#new</h1>
-<p>Find me in app/views/courses/new.html.erb</p>
+<% provide(:title, "Add a Course") %>
+<h1> Add a Course </h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@course, url: add_course_path) do |f| %>
+      <%= render 'shared/course_error_messages' %>
+
+      <%= f.label :course_no %>
+      <%= f.text_field :course_no, class: 'form-control' %>
+
+      <%= f.label :course_session %>
+      <%= f.text_field :course_session, class: 'form-control' %>
+
+      <%= f.label :course_desc %>
+      <%= f.text_field :course_desc, class: 'form-control' %>
+
+      <%= f.submit "Add this Course", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

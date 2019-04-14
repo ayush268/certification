@@ -1,0 +1,21 @@
+<% provide(:title, "Courses Catalog") %>
+<h1 class="heading">All Courses Offered</h1>
+<table>
+  <tr>
+    <th>Course No</th>
+    <th>Session</th>
+    <th>Status</th>
+    <th>Instructor</th>
+  </tr>
+  <% @courses.each do |course| %>
+  <tr>
+    <%= content_tag :td do %>
+      <%= link_to course[:no], course_path(course[:id]) %>
+    <% end %>
+    <%= content_tag :td, course[:session] %>
+    <%= content_tag :td, course[:status] %>
+    <%= content_tag :td, course[:inst][:name] %>
+  </tr>
+  <% end %>
+</table>
+<p>Want to offer a course? <%= link_to "Add a Course!", add_course_path %></p>

@@ -5,6 +5,8 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.string :course_session, null: false
       t.text :course_desc
       t.string :user_id
+      t.boolean :accepted
+      t.datetime :accepted_time
 
       t.timestamps
     end
