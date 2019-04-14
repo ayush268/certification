@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
 
   def new
+    if logged_in?
+      redirect_to user_path(current_user[:public_addr])
+    end
   end
 
   def create
@@ -8,7 +11,7 @@ class SessionsController < ApplicationController
     if user and user.authenticate(params[:session][:password])
       log_in user
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user
+      redirect_to user_path(user[:public_addr])
     else
       flash.now[:danger] = 'Invalid username/password combination'
       render 'new'
