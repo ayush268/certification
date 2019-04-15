@@ -65,7 +65,8 @@ class CoursesController < ApplicationController
               passed: m.passed,
               email: m.user.email
             }
-          @mappings = @course.user_course_mappings
+          @mappings = @course.user_course_mappings.select{ |x| not x.accepted }
+          @accepted_mappings = @course.user_course_mappings.select{ |x| x.accepted }
           end
           render 'inst_page'
         when 2
@@ -87,6 +88,26 @@ class CoursesController < ApplicationController
       else
         redirect_to course_path(params[:id])
       end
+    end
+    if params[:commit] == "Approve Requests"
+      accepted_mappings = params[:accepted_users][:id]
+      accepted_mappings.select!{ |v| v.to_i != 0 }
+
+      accepted_mappings.each do |id|
+        m = UserCourseMapping.find(id)
+        m.update(accepted: true)
+      end
+      redirect_to user_path(current_user[:public_addr])
+    end
+    if params[:commit] == "Submit Grades"
+      passed_mappings = params[:passed_users][:id]
+      passed_mappings.select!{ |v| v.to_i != 0 }
+
+      passed_mappings.each do |id|
+        m = UserCourseMapping.find(id)
+        m.update(passed: true)
+      end
+      redirect_to user_path(current_user[:public_addr])
     end
   end
 

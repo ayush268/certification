@@ -7,4 +7,7 @@ class Course < ApplicationRecord
     content = course_no + ", " + course_session + " taken by: " + user.name + "(" + user.public_addr + ")" + "\n" + course_desc
   end
 
+  def accepted_users
+  end
+
 end

@@ -46,16 +46,17 @@ class UsersController < ApplicationController
     
     keys = get_keys
     @user[:public_addr] = keys[:public_addr]
+    @user[:public_key] = keys[:public_key]
     #TODO register ethereum wallet on ropstein network
     if @user.save
       
-      send_data keys.to_json,
-        :type => 'text/json; charset=UTF-8;',
-        :disposition => "attachment; filename=keep_it_safe.json"
+      #send_data keys.to_json,
+      #  :type => 'text/json; charset=UTF-8;',
+      #  :disposition => "attachment; filename=keep_it_safe.json"
 
       log_in @user
       flash[:success] = "Welcome to Certification!"
-      #redirect_to user_path(@user[:public_addr])
+      redirect_to user_path(@user[:public_addr])
     else
       render 'new'
     end
