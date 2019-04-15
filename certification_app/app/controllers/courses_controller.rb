@@ -7,7 +7,7 @@ class CoursesController < ApplicationController
       courses = Course.all.select{ |course| course.accepted }
       @courses = []
       if courses.size != 0
-        @courses = courses.all.map do |course|
+        @courses = courses.map do |course|
           {
             id: course.id,
             no: course.course_no,
@@ -48,7 +48,7 @@ class CoursesController < ApplicationController
     if not logged_in?
       redirect_to login_path
     else
-
+      #TODO Complete this function
     end
   end
 
