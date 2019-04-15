@@ -1,6 +1,7 @@
 import numpy as np
 import random
 import hashlib
+import sys
 
 class Node():
     def __init__(self, hash_val, lc, rc):
@@ -51,7 +52,7 @@ class Merkle_tree():
         curr = []
         for i in range(len(self.original_list)):
             tmp = self.get_hash(self.original_list[i])
-            print ("i:",i," hash:",tmp)
+            # print ("i:",i," hash:",tmp)
             new_node = Node(tmp,None,None)
             self.original_list_hash.append(new_node)
             curr.append(new_node)
@@ -86,7 +87,7 @@ class Merkle_tree():
     def get_token(self,roll):
         i = self.user_input_list.index(roll)
         if i == -1:
-            print(str(roll)+" not among the leaves of this merkle tree")
+            # print(str(roll)+" not among the leaves of this merkle tree")
             return []
         return self.token_list[i]
     
@@ -94,9 +95,27 @@ class Merkle_tree():
         return len(self.user_input_list)
 
 if __name__ == "__main__":
-    input_list = [1,2,3,4,5,6,7]
+    # print(len(sys.argv))
+    length = len(sys.argv) - 1
+    args = sys.argv[1:]
+    input_list = []
+    for i in range(length):
+        # print(args[i])
+        input_list.append(int(args[i]))
+    # input_list = [1,2,3,4,5,6,7]
+    # input_list_2 = deepcopy(input_list)
     mtree = Merkle_tree(input_list)
     mtree.make_tree()
     mtree.generate_token()
-    print (mtree.token_list)
-    
+    # print(mtree.root.hash)
+    dict_ = {}
+    # sdict_[]
+    dict_["rootHash"] = mtree.root.hash
+    dict_["tokenList"] = {} 
+    # print(input_list_2)
+    for i in range(length):
+        # print(mtree.get_token(input_list[i]))
+        dict_["tokenList"][input_list[i]] = mtree.get_token(input_list[i])
+
+
+    print(dict_)
