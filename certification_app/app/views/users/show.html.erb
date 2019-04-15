@@ -1,5 +1,21 @@
-<% provide(:title, "HomePage") %>
-<h1><%= "Hi " + @user[:name] %></h1>
-<p><%= "Name: " + @user[:name] %></p>
-<p><%= "Username: " + @user[:username] %></p>
-<p><%= "Public_addr: " + @user[:public_addr] %></p>
+<% provide(:title, "Courses Taken") %>
+<h1 class="heading"><%= "Hi " + current_user[:name] %></h1>
+<table>
+  <tr>
+    <th>Course No</th>
+    <th>Session</th>
+    <th>Status</th>
+    <th>Instructor</th>
+  </tr>
+  <% @courses.each do |course| %>
+  <tr>
+    <%= content_tag :td do %>
+      <%= link_to course[:no], course_path(course[:id]) %>
+    <% end %>
+    <%= content_tag :td, course[:session] %>
+    <%= content_tag :td, course[:status] %>
+    <%= content_tag :td, course[:inst][:name] %>
+  </tr>
+  <% end %>
+</table>
+<p>Want to see all the courses? <%= link_to "Course Catalog!", courses_path %></p>

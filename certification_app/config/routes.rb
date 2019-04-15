@@ -24,6 +24,7 @@ Rails.application.routes.draw do
   post    '/users/edit/:public_addr',   to: 'users#update',               as: 'update'
 
   post    '/courses/add_course',        to: 'courses#create'
+  post    '/courses/:id',               to: 'courses#update'
 
   post    '/admin/:hashed_id',          to: 'admin#submit',               as: 'admin_post'
 

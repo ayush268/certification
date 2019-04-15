@@ -1,0 +1,18 @@
+<% provide(:title, "Course HomePage") %>
+<h1><%= @course[:course_no] + ", " + @course[:course_session] %></h1>
+<p>
+  <% if course_status(@course) == "Registration Period" %>
+    <%= form_tag(controller: 'course', action: 'update', method: 'post') do %>
+      <div class="row">
+        <%= collection_check_boxes(:, :user_id, @mappings, :id, :get_course_info) do |b| %>
+          <%= b.label %>
+          <%= b.check_box %>
+        <% end %>
+        <%= submit_tag "Approve Requests", {:class =>"fancy-button"} %>      </div>
+    <% end %>
+  <% elsif course_status(@course) == "Course Ongoing" %>
+    <%= "You were rejected from the course!" %>
+  <% else %>
+    <%= "You were rejected from the course!" %>
+  <% end %>
+</p>

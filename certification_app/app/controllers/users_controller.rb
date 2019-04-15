@@ -6,6 +6,28 @@ class UsersController < ApplicationController
     else
       if current_user[:public_addr] == params[:public_addr]
         @user = User.find(params[:public_addr])
+        courses_offered = @user.courses.select{ |c| c.accepted }.map do |course|
+          {
+            id: course.id,
+            no: course.course_no,
+            session: course.course_session,
+            desc: course.course_desc,
+            status: course_status(course),
+            inst: course.user
+          }
+        end
+        course_mappings = @user.user_course_mappings
+        courses_taken = course_mappings.select{ |m| m.course.accepted }.map do |m|
+          {
+            id: m.course.id,
+            no: m.course.course_no,
+            session: m.course.course_session,
+            desc: m.course.course_desc,
+            status: course_status(m.course),
+            inst: m.course.user
+          }
+        end
+        @courses = courses_offered + courses_taken
       else
         redirect_to user_path(current_user[:public_addr])
       end
@@ -24,6 +46,7 @@ class UsersController < ApplicationController
     
     keys = get_keys
     @user[:public_addr] = keys[:public_addr]
+    #TODO register ethereum wallet on ropstein network
     if @user.save
       
       send_data keys.to_json,

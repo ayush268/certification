@@ -77,6 +77,9 @@ GEM
     crass (1.0.4)
     digest-sha3 (1.1.0)
     erubi (1.8.0)
+    ethereum.rb (2.2)
+      activesupport (>= 4.0)
+      digest-sha3 (~> 1.1)
     execjs (2.7.0)
     ffi (1.10.0)
     globalid (0.4.2)
@@ -214,6 +217,7 @@ DEPENDENCIES
   capybara (>= 2.15)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  ethereum.rb
   httparty
   jbuilder (~> 2.5)
   json

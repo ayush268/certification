@@ -49,6 +49,44 @@ class CoursesController < ApplicationController
       redirect_to login_path
     else
       #TODO Complete this function
+      @course = Course.find(params[:id])
+      if not @course.accepted
+        redirect_to courses_path
+      end
+
+      case inst_or_student_or_else?(@course)
+        when 1
+          @students = @course.user_course_mappings.map do |m|
+            {
+              name: m.user.name,
+              username: m.user.username,
+              addr: m.user.public_addr,
+              status: m.accepted,
+              passed: m.passed,
+              email: m.user.email
+            }
+          @mappings = @course.user_course_mappings
+          end
+          render 'inst_page'
+        when 2
+          #TODO
+        when 3
+          render 'rejected_page'
+        else
+          render 'other_people_page'
+      end
+
+    end
+  end
+
+  def update
+    if params[:commit] == "Register"
+      if register_student(params[:id])
+        flash[:success] = "Your course request has been sent to the instructor for approval!"
+        redirect_to user_path(current_user[:public_addr])
+      else
+        redirect_to course_path(params[:id])
+      end
     end
   end
 
@@ -56,5 +94,29 @@ class CoursesController < ApplicationController
 
     def course_params
       params.require(:course).permit(:course_no, :course_session, :course_desc)
+    end
+
+    def inst_or_student_or_else?(course)
+      if current_user[:public_addr] == course.user[:public_addr]
+        return 1
+      end
+      users = course.user_course_mappings
+      users_accepted = users.select{ |m| m.accepted }.map{ |x| x.user.public_addr }
+      users_rejected = users.select{ |m| not m.accepted }.map{ |x| x.user.public_addr }
+      if users_accepted.include? current_user[:public_addr]
+        return 2
+      elsif users_rejected.include? current_user[:public_addr]
+        return 3
+      end
+      return 4
+    end
+
+    def register_student(course_id)
+      mapping = UserCourseMapping.new(user_id: current_user[:public_addr], course_id: course_id, accepted: false, passed: false)
+      if mapping.save
+        return true
+      else
+        return false
+      end
     end
 end

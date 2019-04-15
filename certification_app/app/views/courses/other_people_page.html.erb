@@ -1,0 +1,14 @@
+<% provide(:title, "Course HomePage") %>
+<h1><%= @course[:course_no] + ", " + @course[:course_session] %></h1>
+<p>
+  <% if course_status(@course) == "Registration Period" %>
+    <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
+      <% params[:enroll] = true %>
+      <%= submit_tag "Register", {:class =>"fancy-button"} %>
+    <% end %>
+  <% elsif course_status(@course) == "Course Ongoing" %>
+    <%= "Course Registration Deadline has passed!" %>
+  <% else %>
+    <%= "Course Registration Deadline has passed!" %>
+  <% end %>
+</p>

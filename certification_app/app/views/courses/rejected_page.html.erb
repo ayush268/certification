@@ -1,0 +1,11 @@
+<% provide(:title, "Course HomePage") %>
+<h1><%= @course[:course_no] + ", " + @course[:course_session] %></h1>
+<p>
+  <% if course_status(@course) == "Registration Period" %>
+    <%= "Request is sent to the instructor" %>
+  <% elsif course_status(@course) == "Course Ongoing" %>
+    <%= "You were rejected from the course!" %>
+  <% else %>
+    <%= "You were rejected from the course!" %>
+  <% end %>
+</p>
