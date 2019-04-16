@@ -1,0 +1,109 @@
+import time
+import sys
+from web3 import Web3, HTTPProvider
+
+# contract_address     = "0x8f768b0ddc2ff05e0d08e8909c620319a191bb28"
+wallet_private_key   = sys.argv[1]
+wallet_address       = sys.argv[2]
+Hash                 = sys.argv[3].encode("UTF-8")
+sigHash              = sys.argv[4].encode("UTF-8")
+
+w3 = Web3(HTTPProvider("https://ropsten.infura.io/v3/da836d6219c5451e984b553ff255feee"))
+# from solc import compile_files
+
+contracts = {
+	"linkReferences": {},
+	"object": "608060405234801561001057600080fd5b5060405160808061035f8339810180604052608081101561003057600080fd5b810190808051906020019092919080519060200190929190805190602001909291908051906020019092919050505033600160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550836006819055508260038190555081600260006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff160217905550806000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055505050505061021d806101426000396000f3fe608060405234801561001057600080fd5b50600436106100415760003560e01c806341c0e1b514610046578063527b83171461005057806364d24b2d14610088575b600080fd5b61004e6100c0565b005b6100866004803603604081101561006657600080fd5b81019080803590602001909291908035906020019092919050505061011b565b005b6100be6004803603604081101561009e57600080fd5b810190808035906020019092919080359060200190929190505050610186565b005b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461011957600080fd5b565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161461017457600080fd5b81600481905550806008819055505050565b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff16146101df57600080fd5b8160058190555080600781905550505056fea165627a7a72305820023dba89251d9af7cb63ab2bdf2db0c7c037a4e918af8f568d3d4981878092340029",
+	"opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x40 MLOAD PUSH1 0x80 DUP1 PUSH2 0x35F DUP4 CODECOPY DUP2 ADD DUP1 PUSH1 0x40 MSTORE PUSH1 0x80 DUP2 LT ISZERO PUSH2 0x30 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 ADD SWAP1 DUP1 DUP1 MLOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 DUP1 MLOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 DUP1 MLOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 DUP1 MLOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 POP POP POP CALLER PUSH1 0x1 PUSH1 0x0 PUSH2 0x100 EXP DUP2 SLOAD DUP2 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF MUL NOT AND SWAP1 DUP4 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND MUL OR SWAP1 SSTORE POP DUP4 PUSH1 0x6 DUP2 SWAP1 SSTORE POP DUP3 PUSH1 0x3 DUP2 SWAP1 SSTORE POP DUP2 PUSH1 0x2 PUSH1 0x0 PUSH2 0x100 EXP DUP2 SLOAD DUP2 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF MUL NOT AND SWAP1 DUP4 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND MUL OR SWAP1 SSTORE POP DUP1 PUSH1 0x0 DUP1 PUSH2 0x100 EXP DUP2 SLOAD DUP2 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF MUL NOT AND SWAP1 DUP4 PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND MUL OR SWAP1 SSTORE POP POP POP POP POP PUSH2 0x21D DUP1 PUSH2 0x142 PUSH1 0x0 CODECOPY PUSH1 0x0 RETURN INVALID PUSH1 0x80 PUSH1 0x40 MSTORE CALLVALUE DUP1 ISZERO PUSH2 0x10 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST POP PUSH1 0x4 CALLDATASIZE LT PUSH2 0x41 JUMPI PUSH1 0x0 CALLDATALOAD PUSH1 0xE0 SHR DUP1 PUSH4 0x41C0E1B5 EQ PUSH2 0x46 JUMPI DUP1 PUSH4 0x527B8317 EQ PUSH2 0x50 JUMPI DUP1 PUSH4 0x64D24B2D EQ PUSH2 0x88 JUMPI JUMPDEST PUSH1 0x0 DUP1 REVERT JUMPDEST PUSH2 0x4E PUSH2 0xC0 JUMP JUMPDEST STOP JUMPDEST PUSH2 0x86 PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x40 DUP2 LT ISZERO PUSH2 0x66 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 ADD SWAP1 DUP1 DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 POP POP POP PUSH2 0x11B JUMP JUMPDEST STOP JUMPDEST PUSH2 0xBE PUSH1 0x4 DUP1 CALLDATASIZE SUB PUSH1 0x40 DUP2 LT ISZERO PUSH2 0x9E JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 ADD SWAP1 DUP1 DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 DUP1 CALLDATALOAD SWAP1 PUSH1 0x20 ADD SWAP1 SWAP3 SWAP2 SWAP1 POP POP POP PUSH2 0x186 JUMP JUMPDEST STOP JUMPDEST PUSH1 0x0 DUP1 SWAP1 SLOAD SWAP1 PUSH2 0x100 EXP SWAP1 DIV PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND CALLER PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND EQ PUSH2 0x119 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST JUMP JUMPDEST PUSH1 0x0 DUP1 SWAP1 SLOAD SWAP1 PUSH2 0x100 EXP SWAP1 DIV PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND CALLER PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND EQ PUSH2 0x174 JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 PUSH1 0x4 DUP2 SWAP1 SSTORE POP DUP1 PUSH1 0x8 DUP2 SWAP1 SSTORE POP POP POP JUMP JUMPDEST PUSH1 0x0 DUP1 SWAP1 SLOAD SWAP1 PUSH2 0x100 EXP SWAP1 DIV PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND CALLER PUSH20 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF AND EQ PUSH2 0x1DF JUMPI PUSH1 0x0 DUP1 REVERT JUMPDEST DUP2 PUSH1 0x5 DUP2 SWAP1 SSTORE POP DUP1 PUSH1 0x7 DUP2 SWAP1 SSTORE POP POP POP JUMP INVALID LOG1 PUSH6 0x627A7A723058 KECCAK256 MUL RETURNDATASIZE 0xba DUP10 0x25 SAR SWAP11 0xf7 0xcb PUSH4 0xAB2BDF2D 0xb0 0xc7 0xc0 CALLDATACOPY LOG4 0xe9 XOR 0xaf DUP16 JUMP DUP14 RETURNDATASIZE 0x49 DUP2 DUP8 DUP1 SWAP3 CALLVALUE STOP 0x29 ",
+	"sourceMap": "854:1162:0:-;;;1220:319;8:9:-1;5:2;;;30:1;27;20:12;5:2;1220:319:0;;;;;;;;;;;;;13:3:-1;8;5:12;2:2;;;30:1;27;20:12;2:2;1220:319:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1403:10;1382:18;;:31;;;;;;;;;;;;;;;;;;1436:11;1423:10;:24;;;;1468:9;1457:8;:20;;;;1500:11;1487:10;;:24;;;;;;;;;;;;;;;;;;1529:3;1521:5;;:11;;;;;;;;;;;;;;;;;;1220:319;;;;854:1162;;;;;;"
+}
+
+abi_ = '''[
+	{
+		"constant": false,
+		"inputs": [],
+		"name": "kill",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "rootHash_",
+				"type": "bytes32"
+			},
+			{
+				"name": "rootSig_",
+				"type": "bytes32"
+			}
+		],
+		"name": "addRootStudentHash",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"constant": false,
+		"inputs": [
+			{
+				"name": "rootHash_",
+				"type": "bytes32"
+			},
+			{
+				"name": "rootSig_",
+				"type": "bytes32"
+			}
+		],
+		"name": "addEnrolledStudentHash",
+		"outputs": [],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"name": "courseHash_",
+				"type": "bytes32"
+			},
+			{
+				"name": "courseNo_",
+				"type": "int256"
+			},
+			{
+				"name": "instructor_",
+				"type": "address"
+			},
+			{
+				"name": "adm",
+				"type": "address"
+			}
+		],
+		"payable": false,
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	}
+]'''
+
+contract = w3.eth.contract(bytecode = contracts["object"], abi = abi_)
+
+if arg5 == "1":
+    nonce=w3.eth.getTransactionCount(w3.toChecksumAddress(wallet_address))
+    deploy_txn2 = contract.functions.addRootStudentHash(Hash, sigHash).buildTransaction({'nonce':nonce,'to': contractAddress, 'gas':2000000})
+    # deploy_txn2 = contract.functions.addCourse("ab".encode('UTF-8'), 123, w3.toChecksumAddress(wallet_address)).transact({'to': txn_receipt["contractAddress"], 'gas':2000000})
+    signed2 = w3.eth.account.signTransaction(deploy_txn2, wallet_private_key)
+    txn_hash2 = w3.eth.sendRawTransaction(signed2.rawTransaction)
+    txn_receipt2 = w3.eth.waitForTransactionReceipt(txn_hash2)
+else:
+    nonce=w3.eth.getTransactionCount(w3.toChecksumAddress(wallet_address))
+    deploy_txn2 = contract.functions.addEnrolledStudentHash(Hash, sigHash).buildTransaction({'nonce':nonce,'to': contractAddress, 'gas':2000000})
+    # deploy_txn2 = contract.functions.addCourse("ab".encode('UTF-8'), 123, w3.toChecksumAddress(wallet_address)).transact({'to': txn_receipt["contractAddress"], 'gas':2000000})
+    signed2 = w3.eth.account.signTransaction(deploy_txn2, wallet_private_key)
+    txn_hash2 = w3.eth.sendRawTransaction(signed2.rawTransaction)
+    txn_receipt2 = w3.eth.waitForTransactionReceipt(txn_hash2)
+
+print(txn_receipt2['transactionHash'].hex(),end='')
