@@ -82,6 +82,7 @@ class CoursesController < ApplicationController
   end
 
   def update
+    @course = Course.find(params[:id])
     if params[:commit] == "Register"
       if register_student(params[:id])
         flash[:success] = "Your course request has been sent to the instructor for approval!"
@@ -106,7 +107,7 @@ class CoursesController < ApplicationController
       rootHash = result['rootHash']
       tokenList = result['tokenList']
 
-      registerstudents(rootHash, params[:private_key], "1")
+      registerstudents(rootHash, params[:private_key], @course[:contract_addr], "1")
 
       accepted_mappings.each do |id|
         m = UserCourseMapping.find(id)
@@ -134,7 +135,7 @@ class CoursesController < ApplicationController
       rootHash = result['rootHash']
       tokenList = result['tokenList']
 
-      registerstudents(rootHash, params[:private_key], "0")
+      registerstudents(rootHash, params[:private_key], @course[:contract_addr], "0")
 
       passed_mappings.each do |id|
         m = UserCourseMapping.find(id)
@@ -205,7 +206,8 @@ class CoursesController < ApplicationController
       end
       python_script = Rails.root.join('python_scripts/merkle_tree.py')
       result = `python #{python_script} #{args}`
-      result = JSON.parse(a)
+      puts(result)
+      result = JSON.parse(result)
       return result
     end
 

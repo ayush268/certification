@@ -5,6 +5,7 @@ class CreateCompCerts < ActiveRecord::Migration[5.2]
       t.integer :course_id
       t.string :desc
       t.string :transaction_hash
+      t.string :tokens
 
       t.timestamps
     end

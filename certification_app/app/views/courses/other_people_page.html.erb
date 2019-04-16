@@ -8,7 +8,7 @@
       <div id="day-1" class='col-lg-9 tab-pane show active' role='tabpanel'>
         <div class="row">
           <% if course_status(@course) == "Registration Period" %>
-            <%= form_tag(controller: 'course', action: 'update', method: 'post') do %>
+            <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
               <% params[:enroll] = true %>
               <%= submit_tag "Register", {:class =>"fancy-button"} %>
             <% end %>

@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.integer "course_id"
     t.string "desc"
     t.string "transaction_hash"
+    t.string "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

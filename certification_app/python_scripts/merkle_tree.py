@@ -102,7 +102,7 @@ if __name__ == "__main__":
     input_list = []
     for i in range(length):
         # print(args[i])
-        input_list.append(int(args[i]))
+        input_list.append(args[i])
     # input_list = [1,2,3,4,5,6,7]
     # input_list_2 = deepcopy(input_list)
     mtree = Merkle_tree(input_list)
