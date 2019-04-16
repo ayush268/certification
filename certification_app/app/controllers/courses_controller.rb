@@ -93,8 +93,10 @@ class CoursesController < ApplicationController
       accepted_mappings = params[:accepted_users][:id]
       accepted_mappings.select!{ |v| v.to_i != 0 }
 
+      cert_hash_list = []
       accepted_mappings.each do |id|
         m = UserCourseMapping.find(id)
+        cert_hash_list.append(approve_student(m))
         m.update(accepted: true)
       end
       redirect_to user_path(current_user[:public_addr])

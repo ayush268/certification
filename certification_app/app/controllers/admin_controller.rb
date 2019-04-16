@@ -19,8 +19,10 @@ class AdminController < ApplicationController
       inst_cert = InstCert.new(user_id: course.user[:public_addr], course_id: course[:id], desc: "You are a instructor now!")
       inst_cert.save
 
-      hash = Digest::SHA256.hexdigest inst_cert.to_json
-      tx_hash = txregisterCourse(@admin, course.user[:public_addr], hash, course[:id])
+      hash = Digest::MD5.new
+      hash << inst_cert.to_json
+      hash = hash.hexdigest
+      tx_hash = registerCourse(@admin, course.user[:public_addr], hash, course[:id]+1000)
 
       inst_cert.update(transaction_hash: tx_hash)
       course.update(accepted: true, accepted_time: DateTime.now)
