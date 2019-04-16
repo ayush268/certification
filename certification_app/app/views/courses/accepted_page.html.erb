@@ -4,18 +4,12 @@
   <% if course_status(@course) == "Registration Period" %>
     <%= "Request is sent to the instructor" %>
   <% elsif course_status(@course) == "Course Ongoing" %>
-    <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
-      <%= submit_tag "Download Acceptance Certificate", {:class =>"fancy-button"} %>
-    <% end %>
+      <a href="/certificate.json">Download Acceptance Certificate</a>
   <% else %>
-    <% if @mapping.passed %>
-      <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
-        <%= submit_tag "Download Completion Certificate", {:class =>"fancy-button"} %>
-      <% end %>
+    <% if @mapping[:passed] %>
+      <a href="/certificate.json">Download Acceptance Certificate</a>
     <% else %>
-      <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
-        <%= submit_tag "Download Acceptance Certificate", {:class =>"fancy-button"} %>
-      <% end %>
+      <a href="/certificate.json">Download Completion Certificate</a>
     <% end %>
   <% end %>
 </p>

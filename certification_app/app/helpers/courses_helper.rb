@@ -4,10 +4,10 @@ module CoursesHelper
   def course_status(course)
 
     # Periods are assumed in hours
-    registration_period = 24
-    course_period = registration_period + 48
+    registration_period = 1
+    course_period = registration_period + 1
 
-    hours_elapsed = (DateTime.now.to_i - course.accepted_time.to_i) / 3600
+    hours_elapsed = (DateTime.now.to_i - course.accepted_time.to_i) / 60
     case true
       when hours_elapsed < registration_period
         return "Registration Period"
