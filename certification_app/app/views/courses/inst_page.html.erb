@@ -8,28 +8,36 @@
       <div id="day-1" class='col-lg-9 tab-pane show active' role='tabpanel'>
         <% if course_status(@course) == "Registration Period" %>
           <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
-            <div class="row">
               <%= collection_check_boxes(:accepted_users, :id, @mappings, :id, :get_user_info) do |b| %>
-                <%= b.label %>
-                <%= b.check_box %>
+                <div class="row">
+                  <%= b.label %>
+                  <%= b.check_box %>
+                </div>
               <% end %>
-              <%= label_tag(:private_key, "Private Key") %>
-              <%= text_field_tag(:private_key, params[:private_key]) %>
-              <%= submit_tag "Approve Requests", {:class =>"fancy-button"} %>
-            </div>
+              <div class="row">
+                <%= label_tag(:private_key, "Private Key") %>
+                <%= text_field_tag(:private_key, params[:private_key]) %>
+              </div>
+              <div class="row">
+                <%= submit_tag "Approve Requests", {:class =>"fancy-button"} %>
+              </div>
           <% end %>
         <% elsif course_status(@course) == "Course Ongoing" %>
           <%= form_tag(controller: 'course', action: 'update', method: 'post') do %>
-            <div class="row">
               <%= collection_check_boxes(:passing_users, :id, @accepted_mappings, :id, :get_user_info) do |b| %>
-                <%= b.label %>
-                <%= b.check_box %>
+                <div class="row">
+                  <%= b.label %>
+                  <%= b.check_box %>
+                </div>
               <% end %>
-              <%= submit_tag "Submit Grades", {:class =>"fancy-button"} %>
-            </div>
+              <div class="row">
+                <%= submit_tag "Submit Grades", {:class =>"fancy-button"} %>
+              </div>
           <% end %>
         <% else %>
-          <%= "Course is Over!" %>
+          <div class="row">
+            <%= "Course is Over!" %>
+          </div>
         <% end %>
       </div>
     </div>
