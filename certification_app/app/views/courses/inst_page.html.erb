@@ -8,6 +8,8 @@
           <%= b.label %>
           <%= b.check_box %>
         <% end %>
+        <%= label_tag(:private_key, "Private Key") %>
+        <%= text_field_tag(:private_key, params[:private_key]) %>
         <%= submit_tag "Approve Requests", {:class =>"fancy-button"} %>
       </div>
     <% end %>
