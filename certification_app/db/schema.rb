@@ -16,6 +16,8 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.string "user_id"
     t.integer "course_id"
     t.string "desc"
+    t.string "transaction_hash"
+    t.string "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.string "user_id"
     t.integer "course_id"
     t.string "desc"
+    t.string "transaction_hash"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -47,6 +50,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.string "user_id"
     t.boolean "accepted"
     t.datetime "accepted_time"
+    t.string "contract_addr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
