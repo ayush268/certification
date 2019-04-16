@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.string "public_addr"
     t.string "public_key"
     t.string "private_key"
+    t.string "contract_addr"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["hashed_id"], name: "index_admins_on_hashed_id", unique: true
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_133720) do
     t.string "user_id"
     t.integer "course_id"
     t.string "desc"
+    t.string "transaction_hash"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

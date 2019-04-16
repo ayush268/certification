@@ -6,6 +6,7 @@ class CreateAdmins < ActiveRecord::Migration[5.2]
       t.string :public_addr
       t.string :public_key
       t.string :private_key
+      t.string :contract_addr
 
       t.timestamps
     end

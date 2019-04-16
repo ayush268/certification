@@ -38,22 +38,14 @@ class UsersController < ApplicationController
     if logged_in?
       redirect_to user_path(current_user[:public_addr])
     end
+    puts(params)
     @user = User.new
   end
 
   def create
     @user = User.new(user_params)
     
-    keys = get_keys
-    @user[:public_addr] = keys[:public_addr]
-    @user[:public_key] = keys[:public_key]
-    #TODO register ethereum wallet on ropstein network
     if @user.save
-      
-      #send_data keys.to_json,
-      #  :type => 'text/json; charset=UTF-8;',
-      #  :disposition => "attachment; filename=keep_it_safe.json"
-
       log_in @user
       flash[:success] = "Welcome to Certification!"
       redirect_to user_path(@user[:public_addr])
@@ -91,7 +83,8 @@ class UsersController < ApplicationController
     
     def user_params
       params.require(:user).permit(:name, :username, :email,
-                                   :password, :password_confirmation)
+                                   :password, :password_confirmation,
+                                   :public_key, :public_addr)
     end
 
     def update_user_params
