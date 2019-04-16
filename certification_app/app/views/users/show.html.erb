@@ -1,21 +1,46 @@
 <% provide(:title, "Courses Taken") %>
-<h1 class="heading"><%= "Hi " + current_user[:name] %></h1>
-<table>
-  <tr>
-    <th>Course No</th>
-    <th>Session</th>
-    <th>Status</th>
-    <th>Instructor</th>
-  </tr>
-  <% @courses.each do |course| %>
-  <tr>
-    <%= content_tag :td do %>
-      <%= link_to course[:no], course_path(course[:id]) %>
-    <% end %>
-    <%= content_tag :td, course[:session] %>
-    <%= content_tag :td, course[:status] %>
-    <%= content_tag :td, course[:inst][:name] %>
-  </tr>
-  <% end %>
-</table>
-<p>Want to see all the courses? <%= link_to "Course Catalog!", courses_path %></p>
+<section id="faq" class="wow" style="visibility: visible;">
+  <div class="container">
+    <div class="section-header">
+      <h2><%= "Hi " + current_user[:name] %></h2>
+    </div>
+    <div class="row justify-content-center">
+      <div class="container-table100">
+        <div class="wrap-table100">
+          <div class="table100 ver4 m-b-110">
+            <div class="table100-head">
+              <table>
+                <thead>
+                  <tr class="row100 head">
+                    <th class="cell100 column1">Course No</th>
+                    <th class="cell100 column2">Session</th>
+                    <th class="cell100 column3">Status</th>
+                    <th class="cell100 column4">Instructor</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+            <div class="table100-body js-pscroll">
+              <table>
+                <tbody>
+                  <% @courses.each do |course| %>
+                    <tr class="row100 body">
+                      <%= content_tag(:td, class: ["cell100", "column1"]) do %>
+                        <%= link_to course[:no], course_path(course[:id])%>
+                      <% end %>
+                      <%= content_tag(:td, course[:session], class: ["cell100", "column2"] ) %>
+                      <%= content_tag(:td, course[:status], class: ["cell100", "column3"]) %>
+                      <%= content_tag(:td, course[:inst][:name], class: ["cell100", "column4"]) %>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+              <br><br>
+              <p>Want to see all the courses? <%= link_to "Course Catalog!", courses_path %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

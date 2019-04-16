@@ -1,11 +1,21 @@
 <% provide(:title, "Course HomePage") %>
-<h1><%= @course[:course_no] + ", " + @course[:course_session] %></h1>
-<p>
-  <% if course_status(@course) == "Registration Period" %>
-    <%= "Request is sent to the instructor" %>
-  <% elsif course_status(@course) == "Course Ongoing" %>
-    <%= "You were rejected from the course!" %>
-  <% else %>
-    <%= "You were rejected from the course!" %>
-  <% end %>
-</p>
+<section id="contact" class="section-bg wow" style="visibility:visible;">
+  <div class="container">
+    <div class="section-header">
+      <h2><%= @course[:course_no] + ", " + @course[:course_session] %></h2>
+    </div>
+    <div class="tab-content row justify-content-center">
+      <div id="day-1" class='col-lg-9 tab-pane show active' role='tabpanel'>
+	    <div class="row">
+	    	<% if course_status(@course) == "Registration Period" %>
+			  <%= "Request is sent to the instructor" %>
+			<% elsif course_status(@course) == "Course Ongoing" %>
+			  <%= "You were rejected from the course!" %>
+			<% else %>
+			  <%= "You were rejected from the course!" %>
+			<% end %>
+	    </div>
+      </div>
+    </div>
+  </div>
+</section>

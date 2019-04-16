@@ -1,21 +1,33 @@
 <% provide(:title, "Add a Course") %>
-<h1> Add a Course </h1>
+<section id="contact" class="section-bg wow" style="visibility:visible;">
+  <div class="container">
+    <div class="section-header">
+      <h2>Add a Course</h2>
+    </div>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@course, url: add_course_path) do |f| %>
-      <%= render 'shared/course_error_messages' %>
+    <div class="form">
+        <%= form_for(@course, url: add_course_path) do |f| %>
+          <%= render 'shared/course_error_messages' %>
 
-      <%= f.label :course_no %>
-      <%= f.text_field :course_no, class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+            <%= f.label :course_no %>
+            <%= f.text_field :course_no, class: 'form-control' %>
+          </div>
 
-      <%= f.label :course_session %>
-      <%= f.text_field :course_session, class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+            <%= f.label :course_session %>
+            <%= f.text_field :course_session, class: 'form-control' %>
+          </div>
 
-      <%= f.label :course_desc %>
-      <%= f.text_field :course_desc, class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+            <%= f.label :course_desc %>
+            <%= f.text_field :course_desc, class: 'form-control' %>
+          </div>
 
-      <%= f.submit "Add this Course", class: "btn btn-primary" %>
-    <% end %>
+          <div class="text-center">
+            <%= f.submit "Add this Course", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
   </div>
-</div>
+</section>

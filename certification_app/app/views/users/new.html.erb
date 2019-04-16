@@ -1,27 +1,43 @@
 <% provide(:title, "Sign Up") %>
-<h1> Sign up </h1>
+<section id="contact" class="section-bg wow" style="visibility:visible;">
+  <div class="container">
+    <div class="section-header">
+      <h2> Sign up </h2>
+    </div>
 
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user, url: signup_path) do |f| %>
-      <%= render 'shared/user_error_messages' %>
+    <div class="form">
+        <%= form_for(@user, url: signup_path) do |f| %>
+          <%= render 'shared/user_error_messages' %>
 
-      <%= f.label :name %>
-      <%= f.text_field :name, id: 'name', class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+            <%= f.label :name %>
+            <%= f.text_field :name, id: 'name', class: 'form-control' %>
+          </div>
 
-      <%= f.label :username %>
-      <%= f.text_field :username, id: 'username', class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+          <%= f.label :username %>
+          <%= f.text_field :username, id: 'username', class: 'form-control' %>
+          </div>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, id: 'email', class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+          <%= f.label :email %>
+          <%= f.email_field :email, id: 'email', class: 'form-control' %>
+          </div>
 
-      <%= f.label :password %>
-      <%= f.password_field :password, id: 'password', class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+          <%= f.label :password %>
+          <%= f.password_field :password, id: 'password', class: 'form-control' %>
+          </div>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control' %>
+          <div class="form-group col-md-6 col-md-offset-3">
+          <%= f.label :password_confirmation, "Confirmation" %>
+          <%= f.password_field :password_confirmation, id: 'password_confirmation', class: 'form-control' %>
+          </div>
 
-      <button type="button" onClick='javascript:signup()'>Create My Account</button>
-    <% end %>
+          <div class="text-center">
+            <button type="button" onClick='javascript:signup()'>Create My Account</button>
+          </div>
+        <% end %>
+    </div>
   </div>
-</div>
+</section>

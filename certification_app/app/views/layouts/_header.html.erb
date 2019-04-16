@@ -1,16 +1,18 @@
-<header class="navbar navbar-fixed-top navbar-inverse">
+<header id="header" class="">
   <div class="container">
-    <%= link_to "Certification", root_path, id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
+    <div id="logo" class="pull-left">
+      <%= link_to image_tag("dragon.jpg"), root_path, class: "scrollto" %>
+    </div>
+    <nav id="nav-menu-container">
+      <ul class="nav-menu sf-js-enabled" style="touch-action: pan-y;">
         <li><%= link_to "Course Catalog",    courses_path %></li>
         <li><%= link_to "Help",    help_path %></li>
         <% if logged_in? %>
-          <li class="dropdown">
+          <li class="sf-arrows">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               Account <b class="caret"></b>
             </a>
-            <ul class="dropdown-menu">
+            <ul class="sf-with-ul">
               <li><%= link_to "Courses Taken", user_path(current_user[:public_addr]) %></li>
               <li><%= link_to "Edit Profile", edit_path(current_user[:public_addr]) %></li>
               <li class="divider"></li>
@@ -21,7 +23,7 @@
           </li>
         <% else %>
           <li><%= link_to "Log in", login_path %></li>
-        	<li><%= link_to "Register", signup_path %></li>
+        	<li class="buy-tickets"><%= link_to "Register", signup_path %></li>
         <% end %>
       </ul>
     </nav>
