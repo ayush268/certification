@@ -26,15 +26,12 @@ def get_root_from_token(certificate, token):
             t = tmp
     return t
 
-def verify():
+def verify(certificate,tx_hash,token):
     """
     certificate: sys.argv[1]
     tx_hash : string argv[2]
     token : argv[3]
     """
-    certificate = sys.argv[1]
-    token = json.loads(sys.argv[3])
-    tx_hash = sys.argv[2]
     cal_root = get_root_from_token(certificate,token)
     actual_root = get_from_ethereum(tx_hash)
     if actual_root == cal_root:
@@ -42,3 +39,5 @@ def verify():
     else:
         match = "0"
     return 0
+
+verify(sys.argv[1],sys.argv[2],sys.argv[3])
