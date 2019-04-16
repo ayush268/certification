@@ -70,7 +70,8 @@ class CoursesController < ApplicationController
           end
           render 'inst_page'
         when 2
-          #TODO
+          @mapping = UserCourseMapping.where(user_id: current_user[:public_addr], course_id: @course[:id])
+          render 'accepted_page'
         when 3
           render 'rejected_page'
         else

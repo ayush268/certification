@@ -1,0 +1,21 @@
+<% provide(:title, "Course HomePage") %>
+<h1><%= @course[:course_no] + ", " + @course[:course_session] %></h1>
+<p>
+  <% if course_status(@course) == "Registration Period" %>
+    <%= "Request is sent to the instructor" %>
+  <% elsif course_status(@course) == "Course Ongoing" %>
+    <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
+      <%= submit_tag "Download Acceptance Certificate", {:class =>"fancy-button"} %>
+    <% end %>
+  <% else %>
+    <% if @mapping.passed %>
+      <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
+        <%= submit_tag "Download Completion Certificate", {:class =>"fancy-button"} %>
+      <% end %>
+    <% else %>
+      <%= form_tag(controller: 'courses', action: 'update', method: 'post') do %>
+        <%= submit_tag "Download Acceptance Certificate", {:class =>"fancy-button"} %>
+      <% end %>
+    <% end %>
+  <% end %>
+</p>
