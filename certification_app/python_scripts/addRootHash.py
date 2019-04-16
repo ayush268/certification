@@ -7,6 +7,7 @@ wallet_private_key   = sys.argv[1]
 wallet_address       = sys.argv[2]
 Hash                 = sys.argv[3].encode("UTF-8")
 sigHash              = sys.argv[4].encode("UTF-8")
+contractAddress      = sys.argv[5]
 
 w3 = Web3(HTTPProvider("https://ropsten.infura.io/v3/da836d6219c5451e984b553ff255feee"))
 # from solc import compile_files
@@ -91,7 +92,7 @@ abi_ = '''[
 
 contract = w3.eth.contract(bytecode = contracts["object"], abi = abi_)
 
-if arg5 == "1":
+if sys.argv[6] == "1":
     nonce=w3.eth.getTransactionCount(w3.toChecksumAddress(wallet_address))
     deploy_txn2 = contract.functions.addRootStudentHash(Hash, sigHash).buildTransaction({'nonce':nonce,'to': contractAddress, 'gas':2000000})
     # deploy_txn2 = contract.functions.addCourse("ab".encode('UTF-8'), 123, w3.toChecksumAddress(wallet_address)).transact({'to': txn_receipt["contractAddress"], 'gas':2000000})

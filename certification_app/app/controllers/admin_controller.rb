@@ -25,7 +25,7 @@ class AdminController < ApplicationController
       tx_hash = registerCourse(@admin, course.user[:public_addr], hash, course[:id]+1000)
 
       inst_cert.update(transaction_hash: tx_hash)
-      course.update(accepted: true, accepted_time: DateTime.now)
+      course.update(accepted: true, accepted_time: DateTime.now, )
     end
 
     redirect_to root_url
@@ -43,9 +43,7 @@ class AdminController < ApplicationController
 
       python_script = Rails.root.join('python_scripts/deployCourseContract.py')
       result = `python #{python_script} #{arg1} #{arg2} #{arg3} #{arg4} #{arg5} #{arg6}`
-      result = result.split(':')
-
-      return result[1]
+      return result
     end
 
 end

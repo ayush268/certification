@@ -10,4 +10,7 @@ class Course < ApplicationRecord
   def accepted_users
   end
 
+  def private_key
+  end
+
 end

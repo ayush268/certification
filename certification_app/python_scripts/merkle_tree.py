@@ -74,9 +74,9 @@ class Merkle_tree():
         prev_hash = hash_val
         while parent != None:
             if parent.left_child.hash == prev_hash:
-                token.append(parent.right_child.hash)
+                token.append(["after",parent.right_child.hash])
             else:
-                token.append(parent.left_child.hash)
+                token.append(["before",parent.left_child.hash])
             prev_hash = parent.hash
             parent = parent.parent
         return token

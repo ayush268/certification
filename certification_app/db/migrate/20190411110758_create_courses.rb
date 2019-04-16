@@ -7,6 +7,7 @@ class CreateCourses < ActiveRecord::Migration[5.2]
       t.string :user_id
       t.boolean :accepted
       t.datetime :accepted_time
+      t.string :contract_addr
 
       t.timestamps
     end
